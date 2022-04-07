@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../api';
 import './LoginForm.css';
 
 export default function LoginForm({ setUser }) {
@@ -8,6 +9,10 @@ export default function LoginForm({ setUser }) {
   async function login(e) {
     e.preventDefault();
 
+    const session = await api.account.createAnonymousSession();
+    setUser(session);
+
+    navigate('/vote');
   }
 
   return (
